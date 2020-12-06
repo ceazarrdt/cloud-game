@@ -24,7 +24,7 @@ const room = (() => {
 
         if (typeof queryDict.id === 'string') {
             room =  decodeURIComponent(queryDict.id);
-        }
+        } 
 
         return [room, zone];
     };

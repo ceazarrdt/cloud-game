@@ -73,7 +73,8 @@
         if (room.getId()) {
             startGame();
         } else {
-            state.menuReady();
+            //state.menuReady();
+            startGame();
         }
     };
 

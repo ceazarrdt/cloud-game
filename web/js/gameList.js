@@ -5,8 +5,21 @@
 const gameList = (() => {
     // state
     let games = [];
-    let gameIndex = 1;
+    let gameSlug = null;
+    let gameIndex = null;
     let gamePickTimer = null;
+    let queryDict = [];
+
+    // Get Game from header
+    location.search.substr(1)
+        .split('&')
+        .forEach((item) => {
+            queryDict[item.split('=')[0]] = item.split('=')[1]
+        });
+    if (typeof queryDict['gameSlug'] === 'string') {
+        gameSlug = queryDict['gameSlug'];
+    }
+
 
     // UI
     const listBox = $('#menu-container');
@@ -106,6 +119,6 @@ const gameList = (() => {
         show: show,
         hide: hide,
         set: setGames,
-        getCurrentGame: () => games[gameIndex]
+        getCurrentGame: () => gameSlug || games[gameIndex]
     }
 })($, event, log);

@@ -249,8 +249,7 @@ func (o *Server) WS(w http.ResponseWriter, r *http.Request) {
 	bc.Send(cws.WSPacket{
 		ID:   "init",
 		Data: createInitPackage(wc.StunTurnServer, o.library.GetAll()),
-	}, nil)
-
+	}, nil) 
 	// If peerconnection is done (client.Done is signalled), we close peerconnection
 	<-bc.Done
 
@@ -274,15 +273,22 @@ func (o *Server) getBestWorkerClient(client *BrowserClient, zone string) (*Worke
 		// if there is not debugHost, continue usual flow
 		client.Println("Not found, connecting to all available servers")
 	}
-
 	workerClients := o.getAvailableWorkers()
-
+	/*
 	serverID, err := o.findBestServerFromBrowser(workerClients, client, zone)
 	if err != nil {
 		log.Println(err)
 		return nil, err
 	}
+	log.Println("Line 290")
+	*/
 
+	//return o.workerClients[serverID], nil
+	var serverID string
+	for k, w := range workerClients {
+		serverID = k
+		_ = w
+	}
 	return o.workerClients[serverID], nil
 }
 

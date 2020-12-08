@@ -70,8 +70,9 @@ func makeHTTPServer(server *Server) *http.Server {
 	r := mux.NewRouter()
 	r.HandleFunc("/ws", server.WS)
 	r.HandleFunc("/wso", server.WSO)
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./web"))))
-	r.PathPrefix("/").HandlerFunc(server.GetWeb)
+	//CT - Player is handled in different app now
+	//r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./web"))))
+	//r.PathPrefix("/").HandlerFunc(server.GetWeb)
 
 	svmux := &http.ServeMux{}
 	svmux.Handle("/", r)

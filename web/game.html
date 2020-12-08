@@ -6,33 +6,62 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <meta property="og:type" content="cloud-game" />
-    <meta property="og:title" content="Web-based Cloud Gaming for Retro Games" />
-    <meta property="og:description" content="Play and share cloud gaming experience with your friends" />
-    <meta property="og:image" content="http://cloud.webgame2d.com/static/img/ogimage.jpg" />
-    <meta property="og:url" content="" />
-    <meta property="og:site_name" content="Cloud Retro" />
-    <meta property="og:author" content="giongto35 trichimtrich" />
-
     <link href="/static/css/font-awesome.css?2" rel="stylesheet">
     <link href="/static/css/main.css?4" rel="stylesheet">
     <link href="/static/css/ui.css?v=1" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Controls -->
+    <div id="circle-pad-holder">
+        <div id="btn-up" class="dpad" value="up"></div>
+        <div id="btn-down" class="dpad" value="down"></div>
+        <div id="btn-left" class="dpad" value="left"></div>
+        <div id="btn-right" class="dpad" value="right"></div>
+        <div id="circle-pad"></div>
+    </div>
+
+    <div id="btn-load" unselectable="on" class="btn big unselectable" value="load"></div>
+    <div id="btn-save" unselectable="on" class="btn big unselectable" value="save"></div>
+    <div id="btn-join" unselectable="on" class="btn big unselectable" value="join"></div>
+
+    <div id="btn-quit" unselectable="on" class="btn big unselectable" value="quit"></div>
+    <div id="btn-select" unselectable="on" class="btn big unselectable" value="select"></div>
+    <div id="btn-start" unselectable="on" class="btn big unselectable" value="start"></div>
+
+    <div id="color-button-holder">
+        <div id="btn-a" unselectable="on" class="btn unselectable" value="a"></div>
+        <div id="btn-b" unselectable="on" class="btn unselectable" value="b"></div>
+        <div id="btn-x" unselectable="on" class="btn unselectable" value="x"></div>
+        <div id="btn-y" unselectable="on" class="btn unselectable" value="y"></div>
+    </div>
+
+    <div id="guide-txt" class="hidden"><b>Arrows</b>(move),<b>ZXCVAS</b>(game ABXYLR),<b>1/2</b>(1st/2nd player),<b>Shift/Enter/K/L</b>(select/start/save/load),<b>F</b>(fullscreen),<b>share</b>(copy sharelink to clipboard)</div>
+    <div id="slider-playeridx" class="slidecontainer">
+      Controller Slot
+    <input type="range" min="1" max="4" value="1" class="slider" id="playeridx" onkeydown="event.preventDefault()">
+    </div>
+
+        <!-- TODO: remove -->
+        <input id="room-txt" type="text" placeholder="room id..." unselectable="on" class="hidden unselectable" disabled>
+
+        <div id="help-overlay">
+            <div id="help-overlay-background"></div>
+            <div id="help-overlay-detail"></div>
+        </div>
+        <div id="btn-help" unselectable="on" class="btn unselectable" value="help"></div>
+
+        <div id="btn-settings" class="btn btn2 unselectable" value="settings">
+            Settings
+        </div>
+
+    <!-- End Controls -->
+
     <div id="gamebody">
         <!--<div id="ui-emulator-bg"></div>-->
 
-        <div id="circle-pad-holder">
-            <div id="btn-up" class="dpad" value="up"></div>
-            <div id="btn-down" class="dpad" value="down"></div>
-            <div id="btn-left" class="dpad" value="left"></div>
-            <div id="btn-right" class="dpad" value="right"></div>
-            <div id="circle-pad"></div>
-        </div>
-
         <div id="bottom-screen">
-            <div id="stats-overlay" class="no-select" hidden></div>
+            <div id="stats-overlay" class="no-select"></div>
             <!--NOTE: New browser doesn't allow unmuted video player. So we muted here.
                 There is still audio because current audio flow is not from media but it is manually encoded (technical webRTC challenge). Later, when we can integrate audio to media, we can face the issue with mute again .
                 https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
@@ -46,41 +75,9 @@
             </div>
         </div>
 
-        <div id="guide-txt"><b>Arrows</b>(move),<b>ZXCVAS</b>(game ABXYLR),<b>1/2</b>(1st/2nd player),<b>Shift/Enter/K/L</b>(select/start/save/load),<b>F</b>(fullscreen),<b>share</b>(copy sharelink to clipboard)</div>
-        <div id="btn-load" unselectable="on" class="btn big unselectable" value="load"></div>
-        <div id="btn-save" unselectable="on" class="btn big unselectable" value="save"></div>
-        <div id="btn-join" unselectable="on" class="btn big unselectable" value="join"></div>
-        <div id="slider-playeridx" class="slidecontainer">
-          Controller Slot
-          <input type="range" min="1" max="4" value="1" class="slider" id="playeridx" onkeydown="event.preventDefault()">
-        </div>
-
-        <div id="btn-quit" unselectable="on" class="btn big unselectable" value="quit"></div>
-        <div id="btn-select" unselectable="on" class="btn big unselectable" value="select"></div>
-        <div id="btn-start" unselectable="on" class="btn big unselectable" value="start"></div>
-
-
-        <div id="color-button-holder">
-            <div id="btn-a" unselectable="on" class="btn unselectable" value="a"></div>
-            <div id="btn-b" unselectable="on" class="btn unselectable" value="b"></div>
-            <div id="btn-x" unselectable="on" class="btn unselectable" value="x"></div>
-            <div id="btn-y" unselectable="on" class="btn unselectable" value="y"></div>
-        </div>
-
-        <!-- TODO: remove -->
-        <input id="room-txt" type="text" placeholder="room id..." unselectable="on" class=" unselectable" disabled>
 
         <div id="noti-box" unselectable="on" class="unselectable">Oh my god</div>
 
-        <div id="help-overlay">
-            <div id="help-overlay-background"></div>
-            <div id="help-overlay-detail"></div>
-        </div>
-        <div id="btn-help" unselectable="on" class="btn unselectable" value="help"></div>
-
-        <div id="btn-settings" class="btn btn2 unselectable" value="settings">
-            Settings
-        </div>
     </div>
 
     <div id="app-settings" class="modal-window">
@@ -139,7 +136,6 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'UA-145078282-1');
     </script>
 
 </body>

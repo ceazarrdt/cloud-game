@@ -6,6 +6,8 @@
     // application state
     let state;
     let lastState;
+    let gameSlug;
+    let gameSystem;
 
     // flags
     // first user interaction
@@ -26,6 +28,7 @@
     const menuScreen = $('#menu-screen');
     const helpOverlay = $('#help-overlay');
     const popupBox = $('#noti-box');
+    const gameBody = $('#gamebody');
     const playerIndex = document.getElementById('playeridx');
 
     // keymap
@@ -33,6 +36,20 @@
     Object.keys(KEY).forEach(button => {
         keyButtons[KEY[button]] = $(`#btn-${KEY[button]}`);
     });
+
+    // Get Game from header
+    let queryDict = [];
+    location.search.substr(1)
+        .split('&')
+        .forEach((item) => {
+            queryDict[item.split('=')[0]] = item.split('=')[1]
+        });
+    if (typeof queryDict['gameSlug'] === 'string') {
+        gameSlug = queryDict['gameSlug'];
+    }
+    if (typeof queryDict['gameSystem'] === 'string') {
+        gameSystem = queryDict['gameSystem'];
+    }
 
     /**
      * State machine transition.
@@ -69,6 +86,7 @@
     };
 
     const onConnectionReady = () => {
+        
         // start a game right away or show the menu
         if (room.getId()) {
             startGame();
@@ -463,6 +481,9 @@
     gameScreen.on('canplay', () => {
         gameScreen[0].poster = '';
     });
+
+    $("body").css("background-image", `url('/static/img/backgrounds/${gameSystem}/${gameSlug}.jpg')` )
+    //console.log(`url('/static/img/bezels/${gameSystem}/${gameSlug}.png')` )
 
     // initial app state
     setState(app.state.eden);

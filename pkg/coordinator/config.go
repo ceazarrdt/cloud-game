@@ -19,7 +19,7 @@ type Config struct {
 func NewDefaultConfig() Config {
 	return Config{
 		Port:              8800,
-		PublicDomain:      "http://localhost:8000",
+		PublicDomain:      "http://arcade.candylan.us/player",
 		PingServer:        "",
 		LibraryMonitoring: false,
 

@@ -42,6 +42,7 @@ var FileTypeToEmulator = map[string]string{
 	"n64": "n64",
 	"v64": "n64",
 	"z64": "n64",
+	"bin": "genesis",
 }
 
 var SupportedRomExtensions = listSupportedRomExtensions()
@@ -80,6 +81,12 @@ var EmulatorConfig = map[string]EmulatorMeta{
 		Path:   "assets/emulator/libretro/cores/nestopia_libretro",
 		Width:  256,
 		Height: 240,
+	},
+	"genesis": {
+		Path:   "assets/emulator/libretro/cores/genesis_plus_gx_libretro",
+		Config: "assets/emulator/libretro/cores/genesis_plus_gx_libretro.cfg",
+		Width:  256,
+		Height: 192,
 	},
 	"snes": {
 		Path:        "assets/emulator/libretro/cores/snes9x_libretro",

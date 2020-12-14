@@ -35,7 +35,7 @@ type Server struct {
 }
 
 const pingServerTemp = "https://%s.%s/echo"
-const devPingServer = "http://localhost:9000/echo"
+const devPingServer = "http://arcade.candylan.us/echo"
 
 var upgrader = websocket.Upgrader{}
 var errNotFound = errors.New("Not found")
